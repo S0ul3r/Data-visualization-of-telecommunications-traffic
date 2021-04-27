@@ -1,14 +1,24 @@
 ## import of needed values
-# import matplotlib.pyplot as plt
-# import pandas as pd
+import matplotlib.pyplot as plt
+import pandas as pd
 
-## Open file to get mean service time
-with openfile("data/Service_times_good.txt") as file:
-    data = file.read()
-    values = []
-    for value in data:
-        values.append(value)
-    
-    ## calculate mean time
-    mean = sum(values)/len(values)
-    print(mean)
+# read data from txt files
+data_serviceTimes = pd.read_csv("data/Service_times.txt", sep=" ")
+data_serviceTimes.columns = ["Connection time"]
+data_callIntensity = pd.read_csv("data/Call_intensity.txt", sep="\t", skip_blank_lines=True)
+data_callIntensity.columns = ["Time_unit", "Number_of_submissions"]
+
+
+# Calculate average service time
+avgServiceTime = data_serviceTimes.sum()/len(data_serviceTimes)
+# New dict where we will store new values (Traffic intensity)
+avgTrafficIntensity = data_callIntensity
+# Calculate Traffic intensity (A = TrafficIntensity * avgServiceTime)
+avgTrafficIntensity["Number_of_submissions"] = avgTrafficIntensity["Number_of_submissions"] * float(avgServiceTime)
+
+
+# Create a plot of Traffic intensity 
+avgTrafficIntensity.plot(x = "Time_unit", y = "Number_of_submissions", label = "Średnie natężenie ruchu", lw=0.8)
+plt.xlabel("Czas [min]")
+plt.ylabel("Natężenie ruchu")
+plt.show()
