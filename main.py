@@ -18,7 +18,9 @@ avgTrafficIntensity["Number_of_submissions"] = avgTrafficIntensity["Number_of_su
 
 
 # Create a plot of Traffic intensity 
-avgTrafficIntensity.plot(x = "Time_unit", y = "Number_of_submissions", label = "Średnie natężenie ruchu", lw=0.8)
+avgTrafficIntensity.plot(x = "Time_unit", y = "Number_of_submissions", label = "Natężenie", lw=0.8)
+plt.title("Średnie natężenie ruchu - A = λ * h \nλ - Średnia liczba zgłoszeń na minutę\nh - Średni czas trwania połączenia")
 plt.xlabel("Czas [min]")
-plt.ylabel("Natężenie ruchu")
+plt.ylabel("Natężenie ruchu A")
+plt.autoscale()
 plt.show()
