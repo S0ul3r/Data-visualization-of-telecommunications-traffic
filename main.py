@@ -15,12 +15,26 @@ avgServiceTime = data_serviceTimes.sum()/len(data_serviceTimes)
 avgTrafficIntensity = data_callIntensity
 # Calculate Traffic intensity (A = TrafficIntensity * avgServiceTime)
 avgTrafficIntensity["Number_of_submissions"] = avgTrafficIntensity["Number_of_submissions"] * float(avgServiceTime)
+avgTrafficIntensity["Time_unit"] = avgTrafficIntensity["Time_unit"] / 60
 
-
-# Create a plot of Traffic intensity 
-avgTrafficIntensity.plot(x = "Time_unit", y = "Number_of_submissions", label = "Natężenie", lw=0.8)
+# Create a plot of Traffic intensity
+plt.subplot(121)
+#avgTrafficIntensity.plot(x = "Time_unit", y = "Number_of_submissions", label = "Natężenie", lw=0.8)
+plt.plot(avgTrafficIntensity["Time_unit"], avgTrafficIntensity["Number_of_submissions"], label = "Natężenie", lw=0.8)
 plt.title("Średnie natężenie ruchu - A = λ * h \nλ - Średnia liczba zgłoszeń na minutę\nh - Średni czas trwania połączenia")
-plt.xlabel("Czas [min]")
+plt.xlabel("Czas [h]")
 plt.ylabel("Natężenie ruchu A")
-plt.autoscale()
+plt.xlim(0, 24)
+plt.ylim(0, 0.35)
+plt.grid(True)
+
+plt.subplot(122)
+#hist = avgTrafficIntensity["Number_of_submissions"].hist(bins=12)
+plt.hist(avgTrafficIntensity["Number_of_submissions"], density=1, facecolor='b', alpha=0.75, bins=12)
+plt.title("Histogram najczęściej występujących wartości natężeń")
+plt.xlabel("Natężenie ruchu A")
+plt.ylabel("Częstość występowania")
+plt.xlim(0, 0.35)
+plt.grid(True)
+
 plt.show()
