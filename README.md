@@ -2,4 +2,4 @@
 Visualization of methods for calculating the average volume value of telecommunications traffic
 
 Ready to use executable file available here:
-https://mega.nz/file/gR4kRLiS#CqyhE3VDqVGKg9PUkVOmMIzaRgB8WrWb0ncmVBF--s8
+https://mega.nz/file/tIAnBIQT#RQWGPUD692qBiDprHxm7RSbbFOmyHLNIQtDETd4TXHI
